@@ -1,0 +1,157 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+body{
+    box-sizing: border-box;
+    background: url("./images/bg-desktop-dark.jpg") no-repeat;
+    background-color: hsl(235, 21%, 11%);
+}
+
+.board {
+    width: 1440px;
+    height: 800px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 650px;
+    height : 700px;
+    align-items: cneter;
+    margin: 50px 50px;
+}
+
+.todoBar {
+    width: 500px;
+    height: 70px;
+    background:  hsl(235, 24%, 19%);
+    display: flex;
+    border-radius: 5px;
+   
+}
+
+.check {
+    width: 40px;
+    height: 40px;
+    border: 1px solid ;
+    font-size: 4px;
+    padding: 5px;
+    margin: 15px 20px;
+    background: hsl(235, 24%, 19%);
+    color:hsl(235, 24%, 19%);
+    display: none;
+}
+.create-todo {
+     width: 400px;
+     height: 50px;
+     margin: 7px;
+     margin-left: 30px;
+     font-size: 30px;
+     background:  hsl(235, 24%, 19%);
+     color: yellow;
+     border: none;
+     outline: none;
+     text-align: center;
+}
+
+
+button {
+     width: 50;
+     height: 50px;
+     margin-left: 60px;
+     margin-top: 20px;
+    display:none;
+}
+
+.todos {
+    margin-top: 20px;
+}
+
+.todo {
+    width: 500px;
+    height: 70px;
+    background:  hsl(235, 24%, 19%);
+    display: flex;
+    border-radius: 5px;
+    align-items: center;
+    margin-bottom: 10px;
+   
+}
+
+.todocheck {
+    width: 30px;
+    height: 30px;
+    border: 1px solid ;
+    font-size: 4px;
+    padding: 5px;
+    margin: 15px 15px;
+    background: hsl(235, 24%, 19%);
+    color:hsl(235, 24%, 19%);
+    cursor: pointer
+    
+}
+
+.task {
+     width: 310px;
+     height: 50px;
+     font-size: 30px;
+     color: yellow;
+     background:  hsl(235, 24%, 19%);
+     border: none;
+     outline: none;
+     text-align: center;
+     margin-top: 5px ;
+     margin-right: 5px;
+     margin-left: 30px;
+}
+
+.trash {
+      width: 30px;
+      height: 30px;
+      cursor: pointer
+}
+
+.edit {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    background:none;
+    cursor: pointer;
+}
+
+.Icon {
+    width: 32px;
+    height: 50px;
+    margin-top: 17px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
