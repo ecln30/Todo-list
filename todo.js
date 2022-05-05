@@ -16,6 +16,8 @@
 const input = document.querySelector(".create-todo")
 const button = document.querySelector("button")
 const todos = document.querySelector(".todos")
+const selected = document.querySelector("select")
+const options = document.querySelectorAll("option")
 let arr = JSON.parse(localStorage.getItem('user')) || []
 
 
@@ -23,6 +25,7 @@ button.addEventListener("click", addItem)
 todos.addEventListener("click", del)
 todos.addEventListener("click", edit)
 todos.addEventListener("click",  toggleDone)
+selected.addEventListener("change", selectedValue)
 display(arr, todos)
 
 function addItem(e) {
@@ -69,25 +72,26 @@ function display(Arr = [],container){
 
 function toggleDone(e){
     e.stopPropagation()
-    console.log("Hello I'm from the toggleDone")
     if(!e.target.matches(".todocheck"))return
     const el = e.target
     const index = el.dataset.index
     arr[index].done = !arr[index].done
-    arr[index].done ? el.nextElementSibling.style.textDecoration ='line-through' : ""
-
+    if(arr[index].done){
+        el.nextElementSibling.classList.add("line")
+    } else {
+        el.nextElementSibling.classList.remove("line")
+    }
+    console.log( el.nextElementSibling)
     localStorage.setItem("user", JSON.stringify(arr))
     display(arr, todos)
-   
 }
 
 function edit(e) {
     e.stopPropagation()
-    console.log("Hello I'm from the edit event")
     if(!e.target.matches(".edit"))return
     const el = e.target
-    const index =  el.dataset.index
-    const value =  el.previousElementSibling.value
+    const index = el.dataset.index
+    let value
     if(el.matches(".edit")) {
         if( el.previousElementSibling.readonly == true) {
             el.previousElementSibling.removeAttribute("readonly")
@@ -99,13 +103,13 @@ function edit(e) {
             el.previousElementSibling.readonly = true
             el.previousElementSibling.style.color ="yellow"
             el.src = "https://aux.iconspalace.com/uploads/edit-icon-256-1210673614.png"
+            value =  el.previousElementSibling.value
             changeValue(value, index)
         }
     }
 }
 
 function changeValue(value, index){
-    console.log("Hello on change input function")
     arr[index].todo = value
     localStorage.setItem("user", JSON.stringify(arr))
 }
@@ -114,7 +118,6 @@ function del(e){
     e.stopPropagation()
     if(!e.target.matches(".trash")) return
    let el = e.target
-   console.log("Hello I'm from delete event")
    const Id = el.id
    if(el.matches(".trash")){
        el.parentNode.parentNode.removeChild(el.parentNode)
@@ -124,9 +127,29 @@ function del(e){
    }
 }
 
+function selectedValue() {
+    let active = []
+    let completed = []
+    const value = Array.from(options)
+                 .filter(option => option.selected)
+                 .map(option => option.value)
+    
+    console.log(value[0])
+    if(value[0] === 'all') display(arr, todos)
+    else if ( value[0] === "active") {
+         active = arr.filter(item => item.done !== true)
+         display(active, todos)
+         console.log(arr)
+    } else if(value[0] === "completed") {
+        completed = arr.filter(item => item.done !== false)
+        console.log(arr)
+        display(completed, todos)
+    }
+
+}
+ console.log(arr)
 input.addEventListener("keyup", e => {
     e.stopPropagation()
-    console.log("Hello I'm from the keyup event")
     if(e.keyCode === 13) {
         button.click()
     }

@@ -22,21 +22,48 @@ body{
 .board {
     width: 1440px;
     height: 800px;
+    
+}
+
+.sun-icon {
+    width: 40px;
+    height: 40px;
 }
 
 .container {
     display: flex;
     flex-direction: column;
-    width: 650px;
-    height : 700px;
+    width: 700px;
+    height : 800px;
     align-items: cneter;
     margin: 50px 50px;
 }
 
-.todoBar {
-    width: 500px;
+.select-box{
+    width: 600px;
+    height:70px;
+    display: flex;
+    justify-content: flex-end;
+    
+}
+
+[name=select] {
+    width: 120px;
+    height: 50px;
+    background: hsl(235, 18%, 14%);
+    color: greenyellow;
+    border: 2px solid white;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.todoBox {
+    width: 600px;
     height: 70px;
-    background:  hsl(235, 24%, 19%);
+    background:  hsl(235, 24%, 19%);;
     display: flex;
     border-radius: 5px;
    
@@ -54,7 +81,7 @@ body{
     display: none;
 }
 .create-todo {
-     width: 400px;
+     width: 500px;
      height: 50px;
      margin: 7px;
      margin-left: 30px;
@@ -67,12 +94,11 @@ body{
 }
 
 
-button {
+button.add {
      width: 50;
      height: 50px;
-     margin-left: 60px;
-     margin-top: 20px;
-    display:none;
+    margin: 10px 5px;
+    display: none
 }
 
 .todos {
@@ -80,7 +106,7 @@ button {
 }
 
 .todo {
-    width: 500px;
+    width: 600px;
     height: 70px;
     background:  hsl(235, 24%, 19%);
     display: flex;
@@ -104,7 +130,7 @@ button {
 }
 
 .task {
-     width: 310px;
+     width: 410px;
      height: 50px;
      font-size: 30px;
      color: yellow;
@@ -134,10 +160,13 @@ button {
 .Icon {
     width: 32px;
     height: 50px;
-    margin-top: 17px;
+    margin-top: 18px;
 }
 
-
+.line {
+       text-decoration: line-through red  !important;
+     
+}
 
 
 
