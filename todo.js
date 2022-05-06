@@ -213,8 +213,7 @@ function toggleTheme(e) {
     
 }
 
-input.addEventListener("keyup", e => {
-    e.stopImmediatePropagation()
+input.addEventListener("keydown", e => {
     if(e.keyCode === 13) {
         button.click()
     }
