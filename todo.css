@@ -1,33 +1,41 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 body{
     box-sizing: border-box;
-    background: url("./images/bg-desktop-dark.jpg") no-repeat;
+    background: url("./images/bg-desktop-dark.jpg")  no-repeat ;
+    background-size: 100%;
     background-color: hsl(235, 21%, 11%);
+    display: flex;
+    justify-content:center
+    
 }
 
 .board {
     width: 1440px;
-    height: 800px;
+    height: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     
 }
+
+.title{
+    display: flex;
+    width: 600px;
+    height: 80px;
+    position: absolute;
+    top: 50px;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 80px;
+    font-size: 30px;
+    color: white;
+}
+
 
 .sun-icon {
     width: 40px;
     height: 40px;
+    margin-right: 50px;
 }
 
 .container {
@@ -43,8 +51,26 @@ body{
     width: 600px;
     height:70px;
     display: flex;
-    justify-content: flex-end;
-    
+    position: absolute;
+    top: 160px;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.clear {
+    width: 120px;
+    height: 40px;
+    font-size: 30px;
+    background:hsl(235, 18%, 14%);
+    border: 2px solid white;
+    color: greenyellow;
+    border-radius: 8px;
+    text-align: center;
+    padding-top: 3px;
+    margin-bottom: 40px;
+    margin-left: 10px;
+    cursor: pointer;
 }
 
 [name=select] {
@@ -58,14 +84,19 @@ body{
     margin-bottom: 10px;
     margin-right: 10px;
     font-size: 20px;
+    
 }
 
 .todoBox {
     width: 600px;
     height: 70px;
+    position: absolute;
+    top: 230px;
     background:  hsl(235, 24%, 19%);;
     display: flex;
     border-radius: 5px;
+    border: 1px solid seagreen;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
    
 }
 
@@ -76,8 +107,6 @@ body{
     font-size: 4px;
     padding: 5px;
     margin: 15px 20px;
-    background: hsl(235, 24%, 19%);
-    color:hsl(235, 24%, 19%);
     display: none;
 }
 .create-todo {
@@ -87,12 +116,11 @@ body{
      margin-left: 30px;
      font-size: 30px;
      background:  hsl(235, 24%, 19%);
-     color: yellow;
-     border: none;
+     border:none;
      outline: none;
+     color: white;
      text-align: center;
 }
-
 
 button.add {
      width: 50;
@@ -102,17 +130,19 @@ button.add {
 }
 
 .todos {
-    margin-top: 20px;
+    position: absolute;
+    top: 313px;
 }
 
 .todo {
     width: 600px;
     height: 70px;
-    background:  hsl(235, 24%, 19%);
     display: flex;
+    background: hsl(235, 24%, 19%);
+    border: 1px solid rgb(141, 155, 141);
     border-radius: 5px;
     align-items: center;
-    margin-bottom: 10px;
+    z-index: 10;
    
 }
 
@@ -123,8 +153,6 @@ button.add {
     font-size: 4px;
     padding: 5px;
     margin: 15px 15px;
-    background: hsl(235, 24%, 19%);
-    color:hsl(235, 24%, 19%);
     cursor: pointer
     
 }
@@ -133,14 +161,13 @@ button.add {
      width: 410px;
      height: 50px;
      font-size: 30px;
-     color: yellow;
      background:  hsl(235, 24%, 19%);
+     color: white;
      border: none;
      outline: none;
      text-align: center;
-     margin-top: 5px ;
-     margin-right: 5px;
-     margin-left: 30px;
+     margin-right: 10px;
+     margin-left: 10px;
 }
 
 .trash {
@@ -168,15 +195,31 @@ button.add {
      
 }
 
+.attribution {
+    margin-top: 10px;
+}
+
+.light {
+    background: url("./images/bg-desktop-light.jpg") no-repeat;
+    background-size: 100%;
+    background-color:  hsl(0, 0%, 98%);
+    outline: none;
+}
+
+.white {
+    background-color: hsl(0, 0%, 98%);
+    color: black;
+}
 
 
+/* ### Light Theme
 
-
-
-
-
-
-
+- Very Light Gray: hsl(0, 0%, 98%)
+- Very Light Grayish Blue: hsl(236, 33%, 92%)
+- Light Grayish Blue: hsl(233, 11%, 84%)
+- Dark Grayish Blue: hsl(236, 9%, 61%)
+- Very Dark Grayish Blue: hsl(235, 19%, 35%)
+ */
 
 
 

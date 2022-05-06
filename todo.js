@@ -1,39 +1,57 @@
-
-
-
-
-
-
-
-
-
-// - Filter by all/active/complete todos
-// - Clear all completed todos
-// - Toggle light and dark mode
-// - **Bonus**: Drag and drop to reorder items on the listBonus: Build this project as a full-stack application
-
-
+// selector
 const input = document.querySelector(".create-todo")
 const button = document.querySelector("button")
 const todos = document.querySelector(".todos")
 const selected = document.querySelector("select")
 const options = document.querySelectorAll("option")
+const clear = document.querySelector(".clear")
+const imgEl = document.querySelector("img")
 let arr = JSON.parse(localStorage.getItem('user')) || []
 
+// declaration variable
+const body = document.body
+let inputBox = body.querySelector(".todoBox")
+const moon = "https://cdn-icons-png.flaticon.com/512/196/196685.png" 
+const sun = "https://icon-library.com/images/sun-icon-png/sun-icon-png-27.jpg"
 
+
+// functions Here
+reFresh()
+function reFresh(e) {
+    if(localStorage.getItem("theme") === "light"){
+             body.classList.add("light")
+             selected.classList.add("white")
+             clear.classList.add("white")
+             inputBox.classList.add("white")
+             input.classList.add("white")
+        localStorage.setItem("theme", "light")
+    } else if(localStorage.getItem("theme") === "Dark") {
+                 body.classList.remove("light")
+                 selected.classList.remove("white")
+                 clear.classList.remove("white")
+                 input.classList.remove("white")
+                 inputBox.classList.remove("white")
+                 localStorage.setItem("theme", "dark")
+        }
+}
+ 
+// eventlistener
 button.addEventListener("click", addItem)
 todos.addEventListener("click", del)
 todos.addEventListener("click", edit)
 todos.addEventListener("click",  toggleDone)
 selected.addEventListener("change", selectedValue)
+clear.addEventListener("click", Clear)
+imgEl.addEventListener("click", toggleTheme)
 display(arr, todos)
 
 function addItem(e) {
-    e.stopPropagation()
+    e.stopImmediatePropagation()
     let work = {
         todo: input.value,
         id: Date.now(),
-        done: false
+        done: false,
+        class: false
     }
 
     arr.push(work)
@@ -51,8 +69,9 @@ function display(Arr = [],container){
           data-index=${i}
           ${item.done ? "checked" : ""} >
 
-          <input type="text" class="task" 
+          <input type="task" class="task"
             value="${item.todo}" 
+            readonly
           >
  
           <img src="https://aux.iconspalace.com/uploads/edit-icon-256-1210673614.png" class="edit" 
@@ -71,7 +90,7 @@ function display(Arr = [],container){
 }
 
 function toggleDone(e){
-    e.stopPropagation()
+    e.stopImmediatePropagation()
     if(!e.target.matches(".todocheck"))return
     const el = e.target
     const index = el.dataset.index
@@ -81,13 +100,13 @@ function toggleDone(e){
     } else {
         el.nextElementSibling.classList.remove("line")
     }
-    console.log( el.nextElementSibling)
+    
     localStorage.setItem("user", JSON.stringify(arr))
+    
     display(arr, todos)
 }
 
 function edit(e) {
-    e.stopPropagation()
     if(!e.target.matches(".edit"))return
     const el = e.target
     const index = el.dataset.index
@@ -96,12 +115,10 @@ function edit(e) {
         if( el.previousElementSibling.readonly == true) {
             el.previousElementSibling.removeAttribute("readonly")
             el.previousElementSibling.readonly = false
-            el.previousElementSibling.style.color ="green"
             el.src = "https://iconarchive.com/download/i98133/flat-icons.com/square/save.ico"
         } else {
             el.previousElementSibling.setAttribute("readonly", "readonly")
             el.previousElementSibling.readonly = true
-            el.previousElementSibling.style.color ="yellow"
             el.src = "https://aux.iconspalace.com/uploads/edit-icon-256-1210673614.png"
             value =  el.previousElementSibling.value
             changeValue(value, index)
@@ -123,39 +140,85 @@ function del(e){
        el.parentNode.parentNode.removeChild(el.parentNode)
         arr = arr.filter( item => item.id != Id)
        localStorage.setItem("user", JSON.stringify(arr))
+       reFresh()
        display(arr, todos)
    }
 }
 
-function selectedValue() {
+function selectedValue(e) {
+    e.stopImmediatePropagation()
     let active = []
     let completed = []
     const value = Array.from(options)
                  .filter(option => option.selected)
                  .map(option => option.value)
     
-    console.log(value[0])
     if(value[0] === 'all') display(arr, todos)
     else if ( value[0] === "active") {
          active = arr.filter(item => item.done !== true)
          display(active, todos)
-         console.log(arr)
     } else if(value[0] === "completed") {
         completed = arr.filter(item => item.done !== false)
-        console.log(arr)
         display(completed, todos)
     }
 
 }
- console.log(arr)
+
+function Clear(e) {
+    e.stopImmediatePropagation()
+    let comfirm = prompt("Are your sure ? All Items will be deleted")
+    if(comfirm === "null" || comfirm === "no") return
+    else if (comfirm === "" || comfirm === "yes") {
+
+        localStorage.clear()
+        arr.length = 0
+        todos.innerHTML = ""
+    }
+}
+
+function toggleTheme(e) {
+    e.stopImmediatePropagation()
+    if(!e.target.matches(".sun-icon"))return
+    let todo = document.querySelectorAll(".todo")
+    let text = body.querySelectorAll(".task")
+    if( imgEl.src == sun) {
+        imgEl.src = moon
+        body.classList.add("light")
+        selected.classList.add("white")
+        clear.classList.add("white")
+        inputBox.classList.add("white")
+        input.classList.add("white")
+        todo.forEach(item => {
+            item.classList.add("white")
+        })
+        text.forEach(item => {
+            item.classList.add("white")
+        })
+        localStorage.setItem("theme", "light")
+    } else if(imgEl.src == moon) {
+            imgEl.src = sun
+            body.classList.remove("light")
+            selected.classList.remove("white")
+            clear.classList.remove("white")
+            input.classList.remove("white")
+            inputBox.classList.remove("white")
+            todo.forEach(item => {
+                item.classList.remove("white")
+            })
+            text.forEach(item => {
+                item.classList.remove("white")
+            })
+            localStorage.setItem("theme", "dark")
+     }
+    
+}
+
 input.addEventListener("keyup", e => {
-    e.stopPropagation()
+    e.stopImmediatePropagation()
     if(e.keyCode === 13) {
         button.click()
     }
 })
-
-
 
 
 
